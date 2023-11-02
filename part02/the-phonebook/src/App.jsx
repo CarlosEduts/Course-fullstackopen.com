@@ -142,15 +142,25 @@ const App = () => {
     } else {
       phonebookServer.postData(arrayName).then((response) => {
         setPersons(persons.concat(arrayName));
-      });
+        setMessege(`${newName} has been successfully added`);
+        setMessegeColor("greenMessege");
+  
+        setTimeout(() => {
+          setMessege(null);
+          setMessegeColor("");
+        }, 5000);
+      }).catch((error) => {
+    
+        setMessege(`"error": "Person validation failed: name: Path name is shorter than the minimum allowed length (3)." or "number is not valid phone number."`);
+        setMessegeColor("redMessege");
+  
+        setTimeout(() => {
+          setMessege(null);
+          setMessegeColor("");
+        }, 5000);
+      })
 
-      setMessege(`${newName} has been successfully added`);
-      setMessegeColor("greenMessege");
 
-      setTimeout(() => {
-        setMessege(null);
-        setMessegeColor("");
-      }, 5000);
     }
   };
 
